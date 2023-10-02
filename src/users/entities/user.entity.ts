@@ -1,5 +1,12 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 type Role = 'Admin' | 'User';
 
@@ -30,7 +37,12 @@ export class User {
   @Column({ default: 'User' })
   role: Role;
 
-  @Field(() => Boolean)
-  @Column({ default: true })
-  isActive: boolean;
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @UpdateDateColumn()
+  updatedDate: Date;
+
+  @DeleteDateColumn()
+  deletedDate: Date;
 }
